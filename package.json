@@ -23,7 +23,8 @@
     "graphql-tag": "^2.4.2",
     "graphql-toolkit": "^0.5.10",
     "graphql-tools": "^1.2.2",
-    "merge-graphql-schemas": "^1.1.4"
+    "merge-graphql-schemas": "^1.1.4",
+    "mongoose": "^5.6.11"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",

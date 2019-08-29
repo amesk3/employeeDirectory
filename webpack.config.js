@@ -1,53 +1,53 @@
-const webpack       = require('webpack');
-const path          = require('path');
-const nodeExternals = require('webpack-node-externals');
+const webpack = require("webpack");
+const path = require("path");
+const nodeExternals = require("webpack-node-externals");
 
 module.exports = [
   {
-    entry: [
-      'babel-polyfill',
-      path.resolve(__dirname, 'src/index.js')
-    ],
+    entry: ["babel-polyfill", path.resolve(__dirname, "server/src/index.js")],
 
-    target: 'node',
+    target: "node",
 
     output: {
-      path: path.resolve(__dirname, 'dist'),
-      filename: 'bundle.js',
-      publicPath: '/'
+      path: path.resolve(__dirname, "dist"),
+      filename: "bundle.js",
+      publicPath: "/"
     },
 
-    devtool: '#source-map',
+    devtool: "#source-map",
 
     module: {
       loaders: [
         {
           test: /\.(js)$/,
-          loader: 'eslint-loader',
-          enforce: 'pre',
-          include: [path.resolve(__dirname, 'src'), path.resolve(__dirname, 'test')],
+          loader: "eslint-loader",
+          enforce: "pre",
+          include: [
+            path.resolve(__dirname, "src"),
+            path.resolve(__dirname, "test")
+          ],
           options: {
-            formatter: require('eslint-friendly-formatter')
+            formatter: require("eslint-friendly-formatter")
           }
         },
         {
           exclude: /node_modules/,
-          loader: 'babel-loader',
+          loader: "babel-loader",
           query: {
-            presets: ['env']
+            presets: ["env"]
           }
         },
         {
           test: /\.(graphql|gql)$/,
           exclude: /node_modules/,
-          loader: 'graphql-tag/loader'
+          loader: "graphql-tag/loader"
         }
       ]
     },
 
     resolve: {
       alias: {
-        '@': path.resolve(__dirname, 'src')
+        "@": path.resolve(__dirname, "src")
       }
     },
 
