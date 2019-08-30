@@ -12,7 +12,20 @@ const EmployeeType = new GraphQLObjectType({
   name: "EmployeeType",
   fields: () => ({
     id: { type: GraphQLID },
-    company: { type: GraphQLString }
+    fullName: { type: GraphQLString },
+    email: { type: GraphQLString },
+    phone: { type: GraphQLInt },
+    company: {
+      type: require("./company_type"),
+      resolve(parentValue) {
+        return Employee.findById(parentValue)
+          .populate("company")
+          .then(employee => {
+            console.log(employee);
+            return employee.company;
+          });
+      }
+    }
   })
 });
 
