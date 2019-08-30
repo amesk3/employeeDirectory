@@ -1,7 +1,0 @@
-type Query {
-  counter: Counter
-}
-
-schema {
-  query: Query
-}
