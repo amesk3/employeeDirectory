@@ -1,11 +1,10 @@
 const chalk = require("chalk");
 const express = require("express");
-const models = require("./models");
 const expressGraphQL = require("express-graphql");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
-const schema = require("./graphql/schema");
-const config = require("../../secret");
+const schema = require("./schema");
+const config = require("../secret");
 const PORT = 3000;
 
 const app = express();

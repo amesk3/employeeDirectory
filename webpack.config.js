@@ -4,7 +4,7 @@ const nodeExternals = require("webpack-node-externals");
 
 module.exports = [
   {
-    entry: ["babel-polyfill", path.resolve(__dirname, "server/src/index.js")],
+    entry: ["babel-polyfill", path.resolve(__dirname, "server/index.js")],
 
     target: "node",
 
@@ -22,10 +22,7 @@ module.exports = [
           test: /\.(js)$/,
           loader: "eslint-loader",
           enforce: "pre",
-          include: [
-            path.resolve(__dirname, "src"),
-            path.resolve(__dirname, "test")
-          ],
+          include: [path.resolve(__dirname, "test")],
           options: {
             formatter: require("eslint-friendly-formatter")
           }
@@ -47,7 +44,7 @@ module.exports = [
 
     resolve: {
       alias: {
-        "@": path.resolve(__dirname, "src")
+        "@": path.resolve(__dirname, "server")
       }
     },
 
