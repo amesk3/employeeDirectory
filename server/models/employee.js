@@ -14,7 +14,12 @@ const EmployeeSchema = new Schema({
   company: {
     type: Schema.Types.ObjectId,
     ref: "company"
-  }
+  },
+  department: {
+    type: Schema.Types.ObjectId,
+    ref: "department"
+  },
+  title: { type: String }
 });
 
 module.exports = mongoose.model("employee", EmployeeSchema);

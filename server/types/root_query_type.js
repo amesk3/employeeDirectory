@@ -1,11 +1,19 @@
 const mongoose = require("mongoose");
 const graphql = require("graphql");
-const { GraphQLObjectType, GraphQLList, GraphQLID, GraphQLNonNull } = graphql;
+const {
+  GraphQLObjectType,
+  GraphQLList,
+  GraphQLID,
+  GraphQLString,
+  GraphQLNonNull
+} = graphql;
 const EmployeeType = require("./employee_type");
 const CompanyType = require("./company_type");
+const DepartmentType = require("./department_type");
 
 const Employee = require("../models/employee");
 const Company = require("../models/company");
+const Department = require("../models/department");
 
 const RootQuery = new GraphQLObjectType({
   name: "RootQueryType",
@@ -17,6 +25,21 @@ const RootQuery = new GraphQLObjectType({
         return Employee.findById(id);
       }
     },
+    department: {
+      type: DepartmentType,
+      args: { id: { type: new GraphQLNonNull(GraphQLID) } },
+      resolve(parentValue, { id }) {
+        return Department.findById(id);
+      }
+    },
+
+    departments: {
+      type: new GraphQLList(DepartmentType),
+      resolve() {
+        return Department.find({});
+      }
+    },
+
     employees: {
       type: new GraphQLList(EmployeeType),
       resolve() {

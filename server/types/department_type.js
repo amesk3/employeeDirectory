@@ -7,23 +7,23 @@ const {
   GraphQLInt,
   GraphQLString
 } = graphql;
-const EmployeeType = require("./employee_type");
-const Company = require("../models/company");
 
-const CompanyType = new GraphQLObjectType({
-  name: "CompanyType",
+const Department = require("../models/department");
+const EmployeeType = require("./employee_type");
+
+const DepartmentType = new GraphQLObjectType({
+  name: "DepartmentType",
   fields: () => ({
     id: { type: GraphQLID },
-    companyName: { type: GraphQLString },
-    location: { type: GraphQLString },
-
+    departmentName: { type: GraphQLString },
     employees: {
+      //find all the employee with the departmentName
       type: new GraphQLList(EmployeeType),
       resolve(parentValue) {
-        return Company.findEmployees(parentValue.id);
+        return Department.findEmployees(parentValue.id);
       }
     }
   })
 });
 
-module.exports = CompanyType;
+module.exports = DepartmentType;

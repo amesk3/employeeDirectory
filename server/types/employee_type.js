@@ -7,6 +7,7 @@ const {
   GraphQLInt,
   GraphQLString
 } = graphql;
+const Employee = require("../models/employee");
 
 const EmployeeType = new GraphQLObjectType({
   name: "EmployeeType",
@@ -15,6 +16,20 @@ const EmployeeType = new GraphQLObjectType({
     fullName: { type: GraphQLString },
     email: { type: GraphQLString },
     phone: { type: GraphQLInt },
+    department: {
+      type: require("./department_type"),
+      resolve(parentValue) {
+        return Employee.findById(parentValue)
+          .populate("department")
+          .then(employee => {
+            console.log(employee);
+            return employee.department;
+          });
+      }
+    },
+
+    title: { type: GraphQLString },
+
     company: {
       type: require("./company_type"),
       resolve(parentValue) {
