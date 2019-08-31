@@ -13,7 +13,7 @@ const Company = require("../models/company");
 const CompanyType = new GraphQLObjectType({
   name: "CompanyType",
   fields: () => ({
-    companyId: { type: GraphQLID },
+    id: { type: GraphQLID },
     company: { type: GraphQLString },
     employees: {
       type: new GraphQLList(EmployeeType),

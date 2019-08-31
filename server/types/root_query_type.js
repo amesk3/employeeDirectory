@@ -29,6 +29,12 @@ const RootQuery = new GraphQLObjectType({
       resolve(parentValue, { id }) {
         return Company.findById(id);
       }
+    },
+    companies: {
+      type: new GraphQLList(CompanyType),
+      resolve() {
+        return Company.find({});
+      }
     }
   })
 });

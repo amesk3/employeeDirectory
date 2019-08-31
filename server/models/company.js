@@ -13,12 +13,12 @@ const CompanySchema = new Schema({
   ]
 });
 
-CompanySchema.statics.addEmployeeToCompany = function(companyId, fullName) {
+CompanySchema.statics.addEmployeeToCompany = function(id, fullName) {
   const Employee = require("./employee");
 
   return mongoose
     .model("company", CompanySchema)
-    .findById(companyId)
+    .findById(id)
     .then(company => {
       const employee = new Employee({ fullName, company });
       company.employees.push(employee);
@@ -28,10 +28,10 @@ CompanySchema.statics.addEmployeeToCompany = function(companyId, fullName) {
     });
 };
 
-CompanySchema.statics.findEmployees = function(companyId) {
+CompanySchema.statics.findEmployees = function(id) {
   return mongoose
     .model("company", CompanySchema)
-    .findById(companyId)
+    .findById(id)
     .populate("employees")
     .then(company => company.employees);
 };

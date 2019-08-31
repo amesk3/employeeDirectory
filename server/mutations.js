@@ -30,20 +30,20 @@ const mutation = new GraphQLObjectType({
       type: CompanyType,
       args: {
         company: { type: GraphQLString },
-        companyId: { type: GraphQLID }
+        id: { type: GraphQLID }
       },
-      resolve(parentValue, { company, companyId }) {
-        return new Company({ company, companyId }).save();
+      resolve(parentValue, { company, id }) {
+        return new Company({ company, id }).save();
       }
     },
     addEmployee: {
       type: CompanyType,
       args: {
         fullName: { type: GraphQLString },
-        companyId: { type: GraphQLID }
+        id: { type: GraphQLID }
       }, //add employees
-      resolve(parentValue, { fullName, companyId }) {
-        return new Company.addEmployeeToCompany(companyId, fullName);
+      resolve(parentValue, { fullName, id }) {
+        return new Company.addEmployeeToCompany(id, fullName);
       }
     }
   }
