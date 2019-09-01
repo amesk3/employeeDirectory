@@ -15,6 +15,16 @@ const Employee = require("../models/employee");
 const Company = require("../models/company");
 const Department = require("../models/department");
 
+
+const resolvers ={
+    Title:{
+        employee(parent, args, context, info){
+            return find(title,  {title: args.title})
+        }
+    }
+}
+
+
 const RootQuery = new GraphQLObjectType({
   name: "RootQueryType",
   fields: () => ({
@@ -23,22 +33,8 @@ const RootQuery = new GraphQLObjectType({
       args: { id: { type: new GraphQLNonNull(GraphQLID) } },
       resolve(parentValue, { id }) {
         return Employee.findById(id);
-      }
-    },
-    department: {
-      type: DepartmentType,
-      args: { id: { type: new GraphQLNonNull(GraphQLID) } },
-      resolve(parentValue, { id }) {
-        return Department.findById(id);
-      }
-    },
+      },
 
-    departments: {
-      type: new GraphQLList(DepartmentType),
-      resolve() {
-        return Department.find({});
-      }
-    },
 
     employees: {
       type: new GraphQLList(EmployeeType),
